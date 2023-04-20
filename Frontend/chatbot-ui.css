@@ -5,6 +5,25 @@
     box-sizing: border-box;
 }
 
+#suggestions-list {
+    position: absolute;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+    background-color: white;
+  }
+  
+  #suggestions-list li {
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  #suggestions-list li:hover {
+    background-color: #f1f1f1;
+  }
+  
+
 :root {
     --chat-window-total-width: 380px;
     --chat-window-height: 500px;

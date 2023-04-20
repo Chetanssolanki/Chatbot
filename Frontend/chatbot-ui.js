@@ -55,7 +55,7 @@ function init() {
 
 
 		<div class='chat-input-area'>
-			<input type='text' autofocus class='chat-input' onkeypress='return givenUserInput(event)' placeholder='Type a message ...' autocomplete='off'>
+            <input id='autocomplete' type='text' autofocus class='chat-input' onkeypress='return givenUserInput(event)' placeholder='Type a message ...' autocomplete='on'>
 			<button class='chat-submit'><i class='material-icons'>send</i></button>
 		</div>
 
@@ -63,7 +63,7 @@ function init() {
 
 
     chatContainer.innerHTML = template;
-
+    //<input type='text' autofocus class='chat-input' onkeypress='return givenUserInput(event)' placeholder='Type a message ...' autocomplete='off'>
     //--------------------------- Important Variables----------------------------
     var inactiveMessage = "Server is down, Please contact the developer to activate it"
 
@@ -183,13 +183,13 @@ function send(message) {
         data: JSON.stringify({
             "symps": message,
         }),
-        success: function(data, textStatus) {
+        success: function (data, textStatus) {
             if (data != null) {
                 setBotResponse(data);
             }
             console.log("Rasa Response: ", data, "\n Status:", textStatus)
         },
-        error: function(errorMessage) {
+        error: function (errorMessage) {
             setBotResponse("");
             console.log('Error' + errorMessage);
 
@@ -201,7 +201,7 @@ function send(message) {
 
 //------------------------------------ Set bot response -------------------------------------
 function setBotResponse(val) {
-    setTimeout(function() {
+    setTimeout(function () {
         if (val.length < 1) {
             //if there is no response from Rasa
             // msg = 'I couldn\'t get that. Let\' try something else!';
@@ -213,7 +213,7 @@ function setBotResponse(val) {
             chatInput.focus();
 
         } else {
-            console.log('Data: ',val)
+            console.log('Data: ', val)
             var BotResponse = `<div class='bot-msg'><img class='bot-img' src ='${botLogoPath}' /><span class='msg'>${val}</span></div>`;
             $(BotResponse).appendTo('.chat-area').hide().fadeIn(1000);
             //if we get response from Rasa
@@ -269,11 +269,11 @@ function mobileView() {
 
     if (chatPopup.style.display == "none") {
         chatPopup.style.display = "flex"
-            // chatInput.focus();
+        // chatInput.focus();
         chatBtn.style.display = "none"
         chatPopup.style.bottom = "0"
         chatPopup.style.right = "0"
-            // chatPopup.style.transition = "none"
+        // chatPopup.style.transition = "none"
         expandWindow.innerHTML = `<img src = "./icons/close.png" class = "icon" >`
     }
 }
@@ -313,6 +313,7 @@ function createChatBot(hostURL, botLogo, title, welcomeMessage, inactiveMsg, the
     botLogoPath = botLogo;
     inactiveMessage = inactiveMsg;
     init()
+   
     const msg = document.querySelector(".msg");
     msg.innerText = welcomeMessage;
 
